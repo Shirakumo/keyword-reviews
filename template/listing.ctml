@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"/>
+    <title><c:splice lquery="(text title)" /> - Keyword</title>
+    <link rel="stylesheet" type="text/css" href="/static/keyword-reviews/default.css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Reviews of things with just a single keyword." />
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body>
+    <header>
+      <h1>Keyword <c:splice lquery="(text title)"/></h1>
+    </header>
+    <main>
+      <c:when test="(and (auth:current) (user:check (auth:current) '(keyword review make)))">
+        <form id="make-review" action="/api/keyword/review/make" method="post">
+          <select name="type" iterate="types">
+            <option lquery="(text title) (val title)"></option>
+          </select>
+          <input type="text" class="item" name="item" maxlength="64" placeholder="Item" required />
+          <input type="text" class="review" name="review" maxlength="32" placeholder="Review" required />
+          <input type="hidden" name="browser" value="true" />
+          <input type="submit" value="Submit" />
+        </form>
+      </c:when>
+      <ul id="reviews" iterate="reviews">
+        <li>
+          <article class="review">
+            <header>
+              <span class="type fa" lquery="(keyword-fill-type type (** :typemap))">TYPE</span>
+              <address class="author"><a rel="author" lquery="(text author)">AUTHOR</a></address>
+              <time lquery="(keyword-fill-time time)">TIME</time>
+            </header>
+            <h2 lquery="(text item)" class="item">ITEM</h2>
+            <p lquery="(text review)" class="review">REVIEW</p>
+          </article>
+        </li>
+      </ul>
+    </main>
+    <footer>
+      <footer>
+        Running TyNETv5 <a href="https://github.com/Shirakumo/radiance">Radiance</a>, <a href="https://github.com/Shirakumo/keyword-reviews">Keyword-Reviews</a>.
+      </footer>
+    </footer>
+  </body>
+</html>
