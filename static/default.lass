@@ -44,6 +44,10 @@
   (article
    :margin 20px 0 0 0
    :background "#EEE"
+   (a :color inherit
+      :text-decoration none)
+   ((:and a :hover)
+    :color "#0088EE")
    (header
     :background "#151515"
     :color "#FFF"

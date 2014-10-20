@@ -29,12 +29,12 @@
         <li>
           <article class="review">
             <header>
-              <span class="type fa" lquery="(keyword-fill-type type (** :typemap))">TYPE</span>
-              <address class="author"><a rel="author" lquery="(text author)">AUTHOR</a></address>
+              <a class="type fa" href="#" lquery="(keyword-fill-type type (** :typemap))">TYPE</a>
+              <address class="author"><a rel="author" href="#" lquery='(text author) (attr :href (format NIL "/filter/author/~a" author))'>AUTHOR</a></address>
               <time lquery="(keyword-fill-time time)">TIME</time>
             </header>
-            <h2 lquery="(text item)" class="item">ITEM</h2>
-            <p lquery="(text review)" class="review">REVIEW</p>
+            <h2 class="item"><a href="#" lquery='(text item) (attr :href (format NIL "/filter/item/~a" item))'>ITEM</a></h2>
+            <p class="review"><a href="#" lquery='(text review) (attr :href (format NIL "/filter/review/~a" review))'>REVIEW</a></p>
           </article>
         </li>
       </ul>

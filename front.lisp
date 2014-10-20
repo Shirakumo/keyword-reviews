@@ -44,6 +44,7 @@
     (lquery:$ node
       (add-class (dm:field type "icon"))
       (text (dm:field type "title"))
+      (attr :href (format NIL "/filter/type/~a" (dm:field type "title")))
       (data :lookup (dm:field type "lookup")))))
 
 (define-page frontpage #@"keyword/" (:lquery (template "listing.ctml"))
@@ -53,3 +54,6 @@
        :types types
        :typemap (make-typemap types)
        :reviews (dm:get 'keyword-reviews (db:query :all) :amount 100 :sort '((time :DESC))))))
+
+(define-page filter #@"keyword/filter/(.+)" (:uri-groups (filter) :lquery "listing.ctml")
+  )
