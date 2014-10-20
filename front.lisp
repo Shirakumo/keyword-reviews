@@ -55,5 +55,17 @@
        :typemap (make-typemap types)
        :reviews (dm:get 'keyword-reviews (db:query :all) :amount 100 :sort '((time :DESC))))))
 
-(define-page filter #@"keyword/filter/(.+)" (:uri-groups (filter) :lquery "listing.ctml")
-  )
+(define-page filter #@"keyword/filter/(.+)" (:uri-groups (filter) :lquery (template "listing.ctml"))
+  (let ((filters (loop with filters = ()
+                       for (arg value) on (cl-ppcre:split "/" filter) by #'cddr
+                       for filter = (find arg '(:TYPE :AUTHOR :ITEM :REVIEW) :test #'string-equal)
+                       when filter
+                       do (push filter filters)
+                          (push value filters)
+                       finally (return (nreverse filters))))
+        (types (types)))
+    (r-clip:process
+     T :title (format NIL "Filtered by ~{~a: ~a~^, ~}" filters)
+       :types types
+       :typemap (make-typemap types)
+       :reviews (when filters (apply #'reviews filters)))))

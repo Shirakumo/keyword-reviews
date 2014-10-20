@@ -18,4 +18,5 @@
                (:interface :dm)
                (:interface :auth)
                :r-clip
-               :local-time))
+               :local-time
+               :cl-ppcre))
