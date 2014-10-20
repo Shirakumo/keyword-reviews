@@ -68,4 +68,4 @@
      T :title (format NIL "Filtered by ~{~a: ~a~^, ~}" filters)
        :types types
        :typemap (make-typemap types)
-       :reviews (when filters (apply #'reviews filters)))))
+       :reviews (when filters (apply #'reviews :amount 100 filters)))))

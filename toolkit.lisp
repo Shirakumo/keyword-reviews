@@ -37,6 +37,7 @@
                            (db:query (:and ,@(loop for item in mut
                                                    collect `(:= ',item ,item))))))))
 
-(defun reviews (&key type author item review)
+(defun reviews (&key type author item review (amount 20) (skip 0))
   (let ((type (and type (dm:id (ensure-type type)))))
-    (dm:get 'keyword-reviews (%enumerate-combinations type author item review))))
+    (dm:get 'keyword-reviews (%enumerate-combinations type author item review)
+            :amount amount :skip skip)))
