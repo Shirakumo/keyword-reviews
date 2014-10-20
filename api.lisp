@@ -30,7 +30,11 @@
   (with-api-error (make-type title icon lookup))
   (api-return "Type created."))
 
-(define-api keyword/type/delete (title) (:access (keyword type delete))
+(define-api keyword/type/edit (type &optional title icon lookup) (:access (keyword type edit))
+  (with-api-error (edit-type type :title title :icon icon :lookup lookup))
+  (api-return "Type edited."))
+
+(define-api keyword/type/delete (title) (:access (keyword type edit))
   (with-api-error (delete-type title))
   (api-return "Type deleted."))
 
@@ -71,4 +75,4 @@
       (assert (<= 0 amount 20) () "AMOUNT must be between 0 and 20.")
       (assert (<= 0 skip) () "SKIP must be 0 or greater."))
     ;;Make this work.
-    ))
+    (api-output (reviews :type type :author author :item item :review review :amount amount :skip skip))))
