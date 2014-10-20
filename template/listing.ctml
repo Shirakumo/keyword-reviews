@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <h1>Keyword <c:splice lquery="(text title)"/></h1>
+      <h1><a href="/">Keyword</a> <c:splice lquery="(text title)"/></h1>
     </header>
     <main>
       <c:when test="(and (auth:current) (user:check (auth:current) '(keyword review make)))">

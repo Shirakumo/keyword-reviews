@@ -4,6 +4,9 @@
  :font-size 12pt
  :margin 0 :padding 0)
 
+(a :color inherit
+   :text-decoration inherit)
+
 (body>header
  :background "#151515"
  :border-bottom 3px solid "#0088EE"
@@ -44,8 +47,6 @@
   (article
    :margin 20px 0 0 0
    :background "#EEE"
-   (a :color inherit
-      :text-decoration none)
    ((:and a :hover)
     :color "#0088EE")
    (header
