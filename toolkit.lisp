@@ -25,19 +25,24 @@
 (defun types ()
   (dm:get 'keyword-types (db:query :all)))
 
-(defun permute (items)
-  (loop for (item . rest) on items
-        nconc (cons (cons item NIL)
-                    (mapcar #'(lambda (rest) (cons item rest))
-                            (permute rest)))))
-
 (defmacro %enumerate-combinations (&rest fields)
-  `(cond ,@(loop for mut in (sort (permute fields) #'> :key #'length)
-                 collect `((and ,@mut)
-                           (db:query (:and ,@(loop for item in mut
-                                                   collect `(:= ',item ,item))))))))
+  (labels ((permute (items)
+             (loop for (item . rest) on items
+                   nconc (cons (cons item NIL)
+                               (mapcar #'(lambda (rest) (cons item rest))
+                                       (permute rest))))))
+    `(cond ,@(loop for mut in (sort (permute fields) #'> :key #'length)
+                   collect `((and ,@mut)
+                             (db:query (:and ,@(loop for item in mut
+                                                     collect `(:= ',item ,item)))))))))
 
 (defun reviews (&key type author item review (amount 20) (skip 0))
   (let ((type (and type (dm:id (ensure-type type)))))
     (dm:get 'keyword-reviews (%enumerate-combinations type author item review)
             :amount amount :skip skip)))
+
+(defun review-accessible-p (review &optional (user (auth:current)))
+  (and user
+       (let ((review (ensure-review review)))
+         (or (user:check user '(keyword review edit))
+             (string-equal (user:username user) (dm:field review "author"))))))

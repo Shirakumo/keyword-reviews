@@ -6,11 +6,6 @@
 
 (in-package #:keyword-reviews)
 
-(defun review-accessible-p (review &optional (user (auth:current)))
-  (let ((review (ensure-review review)))
-    (or (user:check user '(keyword review edit))
-        (string-equal (user:username user) (dm:field review "author")))))
-
 (defmacro with-api-error (&body body)
   `(handler-case (progn ,@body)
      (radiance-error (err)
