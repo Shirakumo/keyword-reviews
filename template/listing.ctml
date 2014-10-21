@@ -37,11 +37,11 @@
           <article class="review">
             <header>
               <a class="type fa" href="#" lquery="(keyword-fill-type type (** :typemap))">TYPE</a>
-              <address class="author"><a rel="author" href="#" lquery='(text author) (attr :href (format NIL "/filter/author/~a" author))'>AUTHOR</a></address>
+              <address class="author"><a rel="author" href="/filter/author/{author}" fill=":href *" lquery='(text author)'>AUTHOR</a></address>
               <time lquery="(keyword-fill-time time)">TIME</time>
             </header>
-            <h2 class="item"><a href="#" lquery='(text item) (attr :href (format NIL "/filter/item/~a" item))'>ITEM</a></h2>
-            <p class="review"><a href="#" lquery='(text review) (attr :href (format NIL "/filter/review/~a" review))'>REVIEW</a></p>
+            <h2 class="item"><a href="/filter/item/{item}" fill=":href *" lquery='(text item)'>ITEM</a></h2>
+            <p class="review"><a href="/filter/review/{review}" fill=":href *" lquery='(text review)'>REVIEW</a></p>
             <footer>
               <c:when test="(keyword-reviews::review-accessible-p *)">
                 <a class="delete-link" href="/api/keyword/review/delete?review={_id}&browser=true" fill=":href *">Delete</a>
