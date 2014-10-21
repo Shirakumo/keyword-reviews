@@ -14,17 +14,24 @@
       <h1><a href="/">Keyword</a> <c:splice lquery="(text title)"/></h1>
     </header>
     <main>
-      <c:when test="(and (auth:current) (user:check (auth:current) '(keyword review make)))">
-        <form id="make-review" action="/api/keyword/review/make" method="post">
-          <select name="type" iterate="types">
-            <option lquery="(text title) (val title)"></option>
-          </select>
-          <input type="text" class="item" name="item" maxlength="64" placeholder="Item" required />
-          <input type="text" class="review" name="review" maxlength="32" placeholder="Review" required />
-          <input type="hidden" name="browser" value="true" />
-          <input type="submit" value="Submit" />
-        </form>
-      </c:when>
+      <form id="make-review" action="/api/keyword/review/make" method="post">
+        <c:if test="(and (auth:current) (user:check (auth:current) '(keyword review make)))">
+          <c:then>
+            <select name="type" iterate="types">
+              <option lquery="(text title) (val title)"></option>
+            </select>
+            <input type="text" class="item" name="item" maxlength="64" placeholder="Item" required />
+            <input type="text" class="review" name="review" maxlength="32" placeholder="Review" required />
+            <input type="hidden" name="browser" value="true" />
+            <input type="submit" value="Submit" />
+          </c:then>
+          <c:else>
+            <span>
+              Please <a href="#">log in</a> to submit reviews.
+            </span>
+          </c:else>
+        </c:if>
+      </form>
       <ul id="reviews" iterate="reviews">
         <li>
           <article class="review">
@@ -35,6 +42,11 @@
             </header>
             <h2 class="item"><a href="#" lquery='(text item) (attr :href (format NIL "/filter/item/~a" item))'>ITEM</a></h2>
             <p class="review"><a href="#" lquery='(text review) (attr :href (format NIL "/filter/review/~a" review))'>REVIEW</a></p>
+            <footer>
+              <c:when test="(keyword-reviews::review-accessible-p *)">
+                <a class="delete-link" href="/api/keyword/review/delete?review={_id}" fill=":href *">Delete</a>
+              </c:when>
+            </footer>
           </article>
         </li>
       </ul>

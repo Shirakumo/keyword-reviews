@@ -6,6 +6,8 @@
 
 (a :color inherit
    :text-decoration inherit)
+((:and a :hover)
+ :color "#0088EE")
 
 (body>header
  :background "#151515"
@@ -26,7 +28,12 @@
   :display flex
   :background "#151515"
   :padding 10px 0 10px 0
-  
+  (span
+   :flex-grow 1
+   :text-align center
+   :color "#FFF"
+   (a :text-decoration underline
+      :font-weight bold))
   ((:or input select)
    :font-size 12pt
    :margin 5px 0 5px 5px
@@ -47,8 +54,7 @@
   (article
    :margin 20px 0 0 0
    :background "#EEE"
-   ((:and a :hover)
-    :color "#0088EE")
+   :position relative
    (header
     :background "#151515"
     :color "#FFF"
@@ -68,6 +74,7 @@
      :font-weight normal)
     (time
      :float right))
+   
    ((:or .item .review)
     :display inline-block
     :margin 0
@@ -76,7 +83,28 @@
    (.item
     :text-transform capitalize)
    ((:and .item :after)
-    :content "': '"))))
+    :content "': '")
+   
+   (footer
+    :display inline-block
+    :position absolute
+    :bottom 0
+    :right 0
+    :background "#CCC"
+    :padding 3px
+    :font-size 8pt
+    :height 14px)
+   ((:and footer :before)
+    :content "''"
+    :position absolute
+    :left -10px
+    :top 0
+    :width 0
+    :height 0
+    :border-style solid
+    :border-width 0 0 20px 10px
+    :border-color transparent transparent "#cccccc" transparent
+    ))))
 
 (body>footer
  :font-size 8pt
