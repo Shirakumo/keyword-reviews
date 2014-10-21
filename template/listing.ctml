@@ -44,7 +44,7 @@
             <p class="review"><a href="#" lquery='(text review) (attr :href (format NIL "/filter/review/~a" review))'>REVIEW</a></p>
             <footer>
               <c:when test="(keyword-reviews::review-accessible-p *)">
-                <a class="delete-link" href="/api/keyword/review/delete?review={_id}" fill=":href *">Delete</a>
+                <a class="delete-link" href="/api/keyword/review/delete?review={_id}&browser=true" fill=":href *">Delete</a>
               </c:when>
             </footer>
           </article>
