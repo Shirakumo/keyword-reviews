@@ -18,10 +18,12 @@
         <c:if test="(and (auth:current) (user:check (auth:current) '(keyword review make)))">
           <c:then>
             <select name="type" iterate="types">
-              <option lquery="(text title) (val title)"></option>
+              <option lquery="(text title) (val title) (attr :selected (string-equal title (getf (** :filters) :type)))"></option>
             </select>
-            <input type="text" class="item" name="item" maxlength="64" placeholder="Item" required />
-            <input type="text" class="review" name="review" maxlength="32" placeholder="Review" required />
+            <input type="text" class="item" name="item" maxlength="64" placeholder="Item" required
+                   lquery="(val (getf filters :item))" />
+            <input type="text" class="review" name="review" maxlength="32" placeholder="Review" required
+                   lquery="(val (getf filters :review))"/>
             <input type="hidden" name="browser" value="true" />
             <input type="submit" value="Submit" />
           </c:then>
