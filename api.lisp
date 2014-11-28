@@ -21,15 +21,15 @@
 (define-api keyword/type/info (title) ()
   (api-output (first (db:select 'keyword-types (db:query (:= 'title title)) :amount 1))))
 
-(define-api keyword/type/make (title icon &optional lookup) (:access (keyword type make))
+(define-api keyword/type/make (title icon &optional lookup) (:access (perm keyword type make))
   (with-api-error (make-type title icon lookup))
   (api-return "Type created."))
 
-(define-api keyword/type/edit (type &optional title icon lookup) (:access (keyword type edit))
+(define-api keyword/type/edit (type &optional title icon lookup) (:access (perm keyword type edit))
   (with-api-error (edit-type type :title title :icon icon :lookup lookup))
   (api-return "Type edited."))
 
-(define-api keyword/type/delete (title) (:access (keyword type edit))
+(define-api keyword/type/delete (title) (:access (perm keyword type edit))
   (with-api-error (delete-type title))
   (api-return "Type deleted."))
 
@@ -41,7 +41,7 @@
 
 (user:add-default-permission '(keyword review make))
 
-(define-api keyword/review/make (type item review) (:access (keyword review make))
+(define-api keyword/review/make (type item review) (:access (perm keyword review make))
   (with-api-error (make-review type (user:username (auth:current)) item review))
   (api-return "Review created."))
 

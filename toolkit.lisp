@@ -44,5 +44,5 @@
 (defun review-accessible-p (review &optional (user (auth:current)))
   (and user
        (let ((review (ensure-review review)))
-         (or (user:check user '(keyword review edit))
+         (or (user:check user (perm keyword review edit))
              (string-equal (user:username user) (dm:field review "author"))))))
