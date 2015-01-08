@@ -44,7 +44,7 @@
     (lquery:$ node
       (add-class (dm:field type "icon"))
       (text (dm:field type "title"))
-      (attr :href (format NIL "/filter/type/~a" (dm:field type "title")))
+      (attr :href (external-pattern "keyword/filter/type/{0}" (dm:field type "title")))
       (data :lookup (dm:field type "lookup")))))
 
 (define-page frontpage #@"keyword/" (:lquery (template "listing.ctml"))

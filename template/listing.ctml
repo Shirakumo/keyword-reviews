@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title><c:splice lquery="(text title)" /> - Keyword</title>
-    <link rel="stylesheet" type="text/css" href="/static/keyword-reviews/default.css" />
+    <link rel="stylesheet" type="text/css" @href="/static/keyword-reviews/default.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Reviews of things with just a single keyword." />
@@ -11,10 +11,10 @@
   </head>
   <body>
     <header>
-      <h1><a href="/">Keyword</a> <c:splice lquery="(text title)"/></h1>
+      <h1><a @href="keyword/">Keyword</a> <c:splice lquery="(text title)"/></h1>
     </header>
     <main>
-      <form id="make-review" action="/api/keyword/review/make" method="post">
+      <form id="make-review" @action="/api/keyword/review/make" method="post">
         <c:if test="(and (auth:current) (user:check (auth:current) '(keyword review make)))">
           <c:then>
             <select name="type" iterate="types">
@@ -29,7 +29,7 @@
           </c:then>
           <c:else>
             <span>
-              Please <a href="#">log in</a> to submit reviews.
+              Please <a @href="<auth:page;login,#>">log in</a> to submit reviews.
             </span>
           </c:else>
         </c:if>
@@ -39,14 +39,14 @@
           <article class="review">
             <header>
               <a class="type fa" href="#" lquery="(keyword-fill-type type (** :typemap))">TYPE</a>
-              <address class="author"><a rel="author" href="/filter/author/{author}" fill=":href *" lquery='(text author)'>AUTHOR</a></address>
+              <address class="author"><a rel="author" @href='(#?"keyword/filter/author/{0}" author)' lquery='(text author)'>AUTHOR</a></address>
               <time lquery="(keyword-fill-time time)">TIME</time>
             </header>
-            <h2 class="item"><a href="/filter/item/{item}" fill=":href *" lquery='(text item)'>ITEM</a></h2>
-            <p class="review"><a href="/filter/review/{review}" fill=":href *" lquery='(text review)'>REVIEW</a></p>
+            <h2 class="item"><a @href='(#?"keyword/filter/item/{0}" item)' lquery='(text item)'>ITEM</a></h2>
+            <p class="review"><a @href='(#?"keyword/filter/review/{0}" review)' lquery='(text review)'>REVIEW</a></p>
             <footer>
               <c:when test="(keyword-reviews::review-accessible-p *)">
-                <a class="delete-link" href="/api/keyword/review/delete?review={_id}&browser=true" fill=":href *">Delete</a>
+                <a class="delete-link" @href='(#?"/api/keyword/review/delete?review={0}&browser=true" _id)'>Delete</a>
               </c:when>
             </footer>
           </article>
