@@ -40,7 +40,7 @@
             <header>
               <a class="type fa" href="#" lquery="(keyword-fill-type type (** :typemap))">TYPE</a>
               <address class="author"><a rel="author" @href='(#?"keyword/filter/author/{0}" author)' lquery='(text author)'>AUTHOR</a></address>
-              <time lquery="(keyword-fill-time time)">TIME</time>
+              <time lquery="(time time)">TIME</time>
             </header>
             <h2 class="item"><a @href='(#?"keyword/filter/item/{0}" item)' lquery='(text item)'>ITEM</a></h2>
             <p class="review"><a @href='(#?"keyword/filter/review/{0}" review)' lquery='(text review)'>REVIEW</a></p>
