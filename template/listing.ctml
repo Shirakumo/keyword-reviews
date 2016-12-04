@@ -15,17 +15,19 @@
     </header>
     <main>
       <form id="make-review" @action="/api/keyword/review/make" method="post">
-        <c:if test="(and (auth:current) (user:check (auth:current) '(keyword review make)))">
+        <c:if test="(auth:current)">
           <c:then>
-            <select name="type" iterate="types">
-              <option lquery="(text title) (val title) (attr :selected (string-equal title (getf (** :filters) :type)))"></option>
-            </select>
-            <input type="text" class="item" name="item" maxlength="64" placeholder="Item" required
-                   lquery="(val (getf filters :item))" />
-            <input type="text" class="review" name="review" maxlength="32" placeholder="Review" required
-                   lquery="(val (getf filters :review))"/>
-            <input type="hidden" name="browser" value="true" />
-            <input type="submit" value="Submit" />
+            <c:when test="(user:check (auth:current) '(keyword review make))">
+              <select name="type" iterate="types">
+                <option lquery="(text title) (val title) (attr :selected (string-equal title (getf (** :filters) :type)))"></option>
+              </select>
+              <input type="text" class="item" name="item" maxlength="64" placeholder="Item" required
+                     lquery="(val (getf filters :item))" />
+              <input type="text" class="review" name="review" maxlength="32" placeholder="Review" required
+                     lquery="(val (getf filters :review))"/>
+              <input type="hidden" name="browser" value="true" />
+              <input type="submit" value="Submit" />
+            </c:when>
           </c:then>
           <c:else>
             <span>
