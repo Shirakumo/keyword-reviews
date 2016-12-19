@@ -7,7 +7,7 @@
 (in-package #:cl-user)
 (asdf:defsystem #:keyword-reviews
   :defsystem-depends-on (:radiance)
-  :class "radiance:module"
+  :class "radiance:virtual-module"
   :components ((:file "module")
                (:file "db")
                (:file "toolkit")
