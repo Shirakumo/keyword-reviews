@@ -41,7 +41,7 @@
                                                      (:= 'item (string-downcase item))
                                                      (:= 'author author))))
         (error "A review for this item has already been made.")
-        (with-model model ('keyword-reviews NIL)
+        (dm:with-model model ('keyword-reviews NIL)
           (setf (dm:field model "type") (dm:id type)
                 (dm:field model "time") (get-universal-time)
                 (dm:field model "author") author

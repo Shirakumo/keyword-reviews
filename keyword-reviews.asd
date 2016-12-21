@@ -15,8 +15,8 @@
                (:file "api")
                (:file "front"))
   :depends-on ((:interface :database)
-               (:interface :dm)
                (:interface :auth)
+               :r-data-model
                :r-clip
                :local-time
                :cl-ppcre))
