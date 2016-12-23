@@ -6,6 +6,12 @@
 
 (in-package #:keyword-reviews)
 
+(define-trigger user:ready ()
+  (defaulted-config (list
+                     (perm keyword review make))
+                    :permissions :default)
+  (apply #'user:add-default-permissions (config :permissions :default)))
+
 (defmacro with-api-error (&body body)
   `(handler-case (progn ,@body)
      (radiance-error (err)
@@ -19,7 +25,7 @@
       (api-output output)))
 
 (define-api keyword/type/info (title) ()
-  (api-output (first (db:select 'keyword-types (db:query (:= 'title title)) :amount 1))))
+  (api-output (first (db:select 'types (db:query (:= 'title title)) :amount 1))))
 
 (define-api keyword/type/make (title icon &optional lookup) (:access (perm keyword type make))
   (with-api-error (make-type title icon lookup))
@@ -34,12 +40,10 @@
   (api-return "Type deleted."))
 
 (define-api keyword/type/list () ()
-  (api-return (db:select 'keyword-types (db:query :all))))
+  (api-return (db:select 'types (db:query :all))))
 
 (define-api keyword/review/info (review) ()
-  (api-output (first (db:select 'keyword-reviews (db:query (:= '_id review)) :amount 1))))
-
-(user:add-default-permission '(keyword review make))
+  (api-output (first (db:select 'reviews (db:query (:= '_id review)) :amount 1))))
 
 (define-api keyword/review/make (type item review) (:access (perm keyword review make))
   (with-api-error (make-review type (user:username (auth:current)) item review))

@@ -8,9 +8,9 @@
 
 (defun make-type (title icon &optional lookup)
   (let ((title (string-downcase title)))
-    (if (dm:get-one 'keyword-types (db:query (:= 'title title)))
+    (if (dm:get-one 'types (db:query (:= 'title title)))
         (error "A type with that title already exists.")
-        (with-model model ('keyword-types NIL)
+        (dM:with-model model ('types NIL)
           (l:info :keyword "Adding type ~a." title)
           (setf (dm:field model "title") title
                 (dm:field model "icon") icon
@@ -37,11 +37,11 @@
             "Title must be between 1 and 64 characters long.")
     (assert (<= 1 (length review) 32) ()
             "Review must be between 1 and 32 characters long.")
-    (if (dm:get-one 'keyword-reviews (db:query (:and (:= 'type (dm:id type))
+    (if (dm:get-one 'reviews (db:query (:and (:= 'type (dm:id type))
                                                      (:= 'item (string-downcase item))
                                                      (:= 'author author))))
         (error "A review for this item has already been made.")
-        (dm:with-model model ('keyword-reviews NIL)
+        (dm:with-model model ('reviews NIL)
           (setf (dm:field model "type") (dm:id type)
                 (dm:field model "time") (get-universal-time)
                 (dm:field model "author") author

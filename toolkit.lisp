@@ -10,20 +10,20 @@
   (or
    (etypecase object
      (dm:data-model object)
-     (fixnum (dm:get-one 'keyword-types (db:query (:= '_id object))))
-     (string (dm:get-one 'keyword-types (db:query (:= 'title (string-downcase object))))))
+     (db:id (dm:get-one 'types (db:query (:= '_id object))))
+     (string (dm:get-one 'types (db:query (:= 'title (string-downcase object))))))
    (error "No such type found.")))
 
 (defun ensure-review (object)
   (or
    (etypecase object
      (dm:data-model object)
-     (fixnum (dm:get-one 'keyword-reviews (db:query (:= '_id object))))
-     (string (dm:get-one 'keyword-reviews (db:query (:= '_id (parse-integer object))))))
+     (db:id (dm:get-one 'reviews (db:query (:= '_id object))))
+     (string (dm:get-one 'reviews (db:query (:= '_id (parse-integer object))))))
    (error "No such review found.")))
 
 (defun types ()
-  (dm:get 'keyword-types (db:query :all)))
+  (dm:get 'types (db:query :all)))
 
 (defmacro %enumerate-combinations (&rest fields)
   (labels ((permute (items)
@@ -38,7 +38,7 @@
 
 (defun reviews (&key type author item review (amount 20) (skip 0))
   (let ((type (and type (dm:id (ensure-type type)))))
-    (dm:get 'keyword-reviews (%enumerate-combinations type author item review)
+    (dm:get 'reviews (%enumerate-combinations type author item review)
             :amount amount :skip skip)))
 
 (defun review-accessible-p (review &optional (user (auth:current)))

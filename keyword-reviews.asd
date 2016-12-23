@@ -13,7 +13,8 @@
                (:file "toolkit")
                (:file "objects")
                (:file "api")
-               (:file "front"))
+               (:file "front")
+               (:file "admin"))
   :depends-on ((:interface :database)
                (:interface :auth)
                :r-data-model

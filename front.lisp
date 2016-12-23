@@ -17,18 +17,19 @@
     (lquery:$ node
       (add-class (dm:field type "icon"))
       (text (dm:field type "title"))
-      (attr :href (external-pattern "keyword/filter/type/{0}" (dm:field type "title")))
+      (attr :href (make-url :domains '("keyword")
+                            :path (format NIL "/filter/type/~a" (dm:field type "title"))))
       (data :lookup (dm:field type "lookup")))))
 
-(define-page frontpage "keyword/" (:lquery (@template "listing.ctml"))
+(define-page frontpage "keyword/" (:clip "listing.ctml")
   (let ((types (types)))
     (r-clip:process
      T :title "Frontpage"
        :types types
        :typemap (make-typemap types)
-       :reviews (dm:get 'keyword-reviews (db:query :all) :amount 100 :sort '((time :DESC))))))
+       :reviews (dm:get 'reviews (db:query :all) :amount 100 :sort '((time :DESC))))))
 
-(define-page filter "keyword/filter/(.+)" (:uri-groups (filter) :lquery (@template "listing.ctml"))
+(define-page filter "keyword/filter/(.+)" (:uri-groups (filter) :clip "listing.ctml")
   (let ((filters (loop with filters = ()
                        for (arg value) on (cl-ppcre:split "/" filter) by #'cddr
                        for filter = (find arg '(:TYPE :AUTHOR :ITEM :REVIEW) :test #'string-equal)
