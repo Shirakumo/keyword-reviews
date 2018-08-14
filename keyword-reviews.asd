@@ -8,6 +8,12 @@
 (asdf:defsystem #:keyword-reviews
   :defsystem-depends-on (:radiance)
   :class "radiance:virtual-module"
+  :author "Nicolas Hafner <shinmera@tymoon.eu>"
+  :maintainer "Nicolas Hafner <shinmera@tymoon.eu>"
+  :license "Artistic"
+  :version "1.0.0"
+  :description "A simple review site allowing reviews of only a few words."
+  :homepage "https://github.com/Shirakumo/keyword-reviews"
   :components ((:file "module")
                (:file "db")
                (:file "toolkit")
