@@ -13,7 +13,9 @@
   :license "Artistic"
   :version "1.0.0"
   :description "A simple review site allowing reviews of only a few words."
-  :homepage "https://github.com/Shirakumo/keyword-reviews"
+  :homepage "https://Shirakumo.github.io/keyword-reviews/"
+  :bug-tracker "https://github.com/Shirakumo/keyword-reviews/issues"
+  :source-control (:git "https://github.com/Shirakumo/keyword-reviews.git")
   :components ((:file "module")
                (:file "db")
                (:file "toolkit")
