@@ -4,7 +4,7 @@ The idea behind this site is to offer a reviewing service for various items. How
 
 How To
 ------
-Set up [Radiance](https://github.com/Shinmera/Radiance) and load Keyword-Reviews with ASDF or Quicklisp. Once it has been started up, you can use `keyword-reviews:make-type` to create new types of items to review. Keyword-Reviews occupies the subdomain `keyword`.
+Set up [Radiance](https://shinmera.com/project/Radiance) and load Keyword-Reviews with ASDF or Quicklisp. Once it has been started up, you can use `keyword-reviews:make-type` to create new types of items to review. Keyword-Reviews occupies the subdomain `keyword`.
 
 Interface Dependencies
 ----------------------
