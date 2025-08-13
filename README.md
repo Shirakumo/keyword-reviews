@@ -1,20 +1,4 @@
-About Keyword-Reviews
----------------------
-The idea behind this site is to offer a reviewing service for various items. However, the trick is that users are supposed to review something with a single term (or keyword). Thus the reviews are not meant to be immediately insightful, but rather as an experiment to see what people think the essence of their impression on something is. Comparing these with each other could lead to interesting findings.
+# This repository has [moved](https://shirakumo.org/projects/keyword-reviews)!
+Due to Microsoft's continued enshittification of the platform this repository has been moved to [Codeberg](https://shirakumo.org/projects/keyword-reviews) in August of 2025. It will not receive further updates or patches. **Issues and pull requests will not be looked at here either**, please submit your patches and issue tickets on Codeberg, or send them directly via good old email patches to [shirakumo@tymoon.eu](mailto:shirakumo@tymoon.eu).
 
-How To
-------
-Set up [Radiance](https://shinmera.com/project/Radiance) and load Keyword-Reviews with ASDF or Quicklisp. Once it has been started up, you can use `keyword-reviews:make-type` to create new types of items to review. Keyword-Reviews occupies the subdomain `keyword`.
-
-Interface Dependencies
-----------------------
-* `database`
-* `data-model`
-* `auth`
-
-Permissions
------------
-* `(keyword type make)`
-* `(keyword type edit)`
-* `(keyword review make)`
-* `(keyword review edit)`
+Thanks.
